@@ -17,11 +17,11 @@ $ComboBox = New-Object System.Windows.Forms.ComboBox
 $ComboBox.Width = 300
 $ComboBox.Location  = New-Object System.Drawing.Point(5,($main_form.Height-10))
 #Add content in Combo box
-$ComboBox.Items.Add("Ping");
-$ComboBox.Items.Add("User Information");
 $ComboBox.text = $paramInput
-
+$ComboBox.Items.Add("Ping");
+$ComboBox.Items.Add("UserInformation");
 $main_form.Controls.Add($ComboBox)
+
 
 #Create button to execute command here!
 $Button01 = New-Object System.Windows.Forms.Button
@@ -34,14 +34,16 @@ $Button01.Add_Click(
     echo $ComboBox.SelectedItem
     switch ($ComboBox.Text) {
         'Ping'{
-            write-Output "In Ping switch" | Out-Default
             $main_form.Close()
             $main_form.Dispose()
-            write-Output "restart program" | Out-Default
-            C:\Users\gowan\Desktop\Programming\Experimenting\GUIforPowershell.ps1 "Ping"
+            #C:\Users\gowan\Desktop\Programming\Experimenting\GUIforPowershell.ps1 "Ping"
+            D:\Users\Gordon\Documents\GitHub\FletcherBuildingToolKit\GUIforPowershell.ps1 "Ping"
         }
-        'Information'{
-            
+        'UserInformation'{
+            $main_form.Close()
+            $main_form.Dispose()
+            #C:\Users\gowan\Desktop\Programming\Experimenting\GUIforPowershell.ps1 "UserInformation"
+            D:\Users\Gordon\Documents\GitHub\FletcherBuildingToolKit\GUIforPowershell.ps1 "UserInformation"
         }
         
     } 
@@ -51,78 +53,106 @@ $Button01.Add_Click(
 
 
 #Adds label
-$Label = New-Object System.Windows.Forms.Label
-$Label.Text = "Username : "
-$Label.Location  = New-Object System.Drawing.Point(5,12)
-$Label.AutoSize = $true
-#$main_form.Controls.Add($Label)
+$PingAssetNoLabel = New-Object System.Windows.Forms.Label
+$PingAssetNoLabel.Text = "Asset No. : "
+$PingAssetNoLabel.Location  = New-Object System.Drawing.Point(5,12)
+$PingAssetNoLabel.AutoSize = $true
+
 
 #Adds label
-$Textbox01 = New-Object System.Windows.Forms.Textbox
-$Textbox01.Text = "FBPF18RA5C"
-$Textbox01.Location  = New-Object System.Drawing.Point(($Label.Width + 5),11)
-$Textbox01.AutoSize = $true
-#$main_form.Controls.Add($Textbox01)
+$PingAssetNumberTextbox = New-Object System.Windows.Forms.Textbox
+$PingAssetNumberTextbox.Text = "FBPF18RA5C"
+$PingAssetNumberTextbox.Location  = New-Object System.Drawing.Point(($Label.Width + 5),11)
+$PingAssetNumberTextbox.AutoSize = $true
 
 
 #Output label text and space for output
-$Label2 = New-Object System.Windows.Forms.Label
-$Label2.Text = "Output : "
-$Label2.Location  = New-Object System.Drawing.Point(5,40)
-$Label2.AutoSize = $true
-#$main_form.Controls.Add($Label2)
+$PingOutputLabel = New-Object System.Windows.Forms.Label
+$PingOutputLabel.Text = "Output : "
+$PingOutputLabel.Location  = New-Object System.Drawing.Point(5,40)
+$PingOutputLabel.AutoSize = $true
 
-$Textbox02 = New-Object System.Windows.Forms.Textbox
-$Textbox02.Text = "Hello World!"
-$Textbox02.Location  = New-Object System.Drawing.Point(115,40)
-$Textbox02.Width = 300
-$Textbox02.Height = 300
-$Textbox02.AutoSize = $true
-$Textbox02.Multiline = $true 
-#$main_form.Controls.Add($Textbox02)
+$PingOutputTextbox = New-Object System.Windows.Forms.Textbox
+$PingOutputTextbox.Text = "Hello World!"
+$PingOutputTextbox.Location  = New-Object System.Drawing.Point(115,40)
+$PingOutputTextbox.Width = 300
+$PingOutputTextbox.Height = 300
+$PingOutputTextbox.AutoSize = $true
+$PingOutputTextbox.Multiline = $true 
 
 #Create button to execute command here!
-$Button = New-Object System.Windows.Forms.Button
-$Button.Location = New-Object System.Drawing.Size(($main_form.Width - 120),10)
-$Button.Size = New-Object System.Drawing.Size(120,23)
-$Button.Text = "Check"
-#$main_form.Controls.Add($Button)
+$PingCheckButton = New-Object System.Windows.Forms.Button
+$PingCheckButton.Location = New-Object System.Drawing.Size(($main_form.Width - 120),10)
+$PingCheckButton.Size = New-Object System.Drawing.Size(120,23)
+$PingCheckButton.Text = "Check"
 
-$Button.Add_Click(
+$PingCheckButton.Add_Click(
 {
     #$ExecutingCmd = Get-UserLogon -Computer $Textbox01.Text
-    $Textbox02.Text = ping $Textbox01.Text
+    $PingOutputTextbox.Text = ping $PingAssetNumberTextbox.Text
 }
 )
 
-<#
-$Button = New-Object System.Windows.Forms.Button
-$Button.Location = New-Object System.Drawing.Size(($main_form.Width - 120),10)
-$Button.Size = New-Object System.Drawing.Size(120,23)
-$Button.Text = "Check"
-$main_form.Controls.Add($Button)
 
-$Button.Add_Click(
+#Adds label
+$InfoUserNameLabel = New-Object System.Windows.Forms.Label
+$InfoUserNameLabel.Text = "User's Name : "
+$InfoUserNameLabel.Location  = New-Object System.Drawing.Point(5,12)
+$InfoUserNameLabel.AutoSize = $true
+
+#Adds label
+$InfoUserNameTextbox = New-Object System.Windows.Forms.Textbox
+$InfoUserNameTextbox.Text = "gorwan"
+$InfoUserNameTextbox.Location  = New-Object System.Drawing.Point(($Label.Width + 5),11)
+$InfoUserNameTextbox.AutoSize = $true
+
+#Create button to execute command here!
+$InfoExecuteButton = New-Object System.Windows.Forms.Button
+$InfoExecuteButton.Location = New-Object System.Drawing.Size(($main_form.Width - 120),10)
+$InfoExecuteButton.Size = New-Object System.Drawing.Size(120,23)
+$InfoExecuteButton.Text = "Execute"
+
+$InfoOutputTextbox = New-Object System.Windows.Forms.Textbox
+$InfoOutputTextbox.Text = "Hello World!"
+$InfoOutputTextbox.Location  = New-Object System.Drawing.Point(10,40)
+$InfoOutputTextbox.Width = 500
+$InfoOutputTextbox.Height = 300
+$InfoOutputTextbox.AutoSize = $true
+$InfoOutputTextbox.Multiline = $true 
+
+$InfoExecuteButton.Add_Click(
 {
-$Label3.Text =  [datetime]::FromFileTime((Get-ADUser -identity $ComboBox.selectedItem -Properties pwdLastSet).pwdLastSet).ToString('MM dd yy : hh ss')
+    #$ExecutingCmd = Get-UserLogon -Computer $Textbox01.Text
+    $InfoOutputTextbox.Text = get-aduser $InfoUserNameTextbox.Text
+    <#
+        get-aduser username -Properties * | Select-Object GivenName, Surname, SamAccountName, Manager, DisplayName, ` 
+        City, EmailAddress, EmployeeID, Enabled, Department, OfficePhone, MobilePhone, LockedOut, LockOutTime, AccountExpirationDate, ` 
+        PasswordExpired, PasswordLastSet, Title
+    #>
 }
 )
-#>
 
 function Open-PingWindow {
-        $main_form.Controls.Add($Label)
-        $main_form.Controls.Add($Textbox01)
-        $main_form.Controls.Add($Label2)
-        $main_form.Controls.Add($Textbox02)
-        $main_form.Controls.Add($Button)
+        $main_form.Controls.Add($PingAssetNoLabel)
+        $main_form.Controls.Add($PingAssetNumberTextbox)
+        $main_form.Controls.Add($PingOutputLabel)
+        $main_form.Controls.Add($PingOutputTextbox)
+        $main_form.Controls.Add($PingCheckButton)
+}
+function Open-UserInformationWindow {
+    $main_form.Controls.Add($InfoUserNameLabel)
+    $main_form.Controls.Add($InfoUserNameTextbox)
+    $main_form.Controls.Add($InfoExecuteButton)
+    $main_form.Controls.Add($InfoOutputTextbox)
+
 }
 
 switch ($paramInput) {
     'Ping' {
         Open-PingWindow
     }
-    'Information' {
-        write-Output "Display User Information" | Out-Default
+    'UserInformation' {
+        Open-UserInformationWindow
     }
 
 }
