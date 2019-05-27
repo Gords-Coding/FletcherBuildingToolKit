@@ -3,6 +3,8 @@
 Add-Type -assembly System.Windows.Forms
 
 
+write-Output "Running with Input param: " $paramInput | Out-Default
+
 #Creates Form
 $main_form = New-Object System.Windows.Forms.Form
 $main_form.Text = 'GUI for my PowerShell Script'
@@ -30,18 +32,19 @@ $main_form.Controls.Add($Button01)
 $Button01.Add_Click(
 {
     echo $ComboBox.SelectedItem
-    if ($ComboBox.Text -eq "Ping") {
-        $main_form.Close()
-        $main_form.Dispose()
-        C:\Users\gowan\Desktop\Programming\Experimenting\GUIforPowershell.ps1 "Ping"
-        #Do this
-        openPingWindow
-        #>
+    switch ($ComboBox.Text) {
+        'Ping'{
+            write-Output "In Ping switch" | Out-Default
+            $main_form.Close()
+            $main_form.Dispose()
+            write-Output "restart program" | Out-Default
+            C:\Users\gowan\Desktop\Programming\Experimenting\GUIforPowershell.ps1 "Ping"
+        }
+        'Information'{
+            
+        }
         
-    } else {
-        #Do this - Try restart program
-
-    }
+    } 
 }
 )
 
@@ -106,8 +109,7 @@ $Label3.Text =  [datetime]::FromFileTime((Get-ADUser -identity $ComboBox.selecte
 )
 #>
 
-function openPingWindow {
-        echo hi
+function Open-PingWindow {
         $main_form.Controls.Add($Label)
         $main_form.Controls.Add($Textbox01)
         $main_form.Controls.Add($Label2)
@@ -115,6 +117,15 @@ function openPingWindow {
         $main_form.Controls.Add($Button)
 }
 
+switch ($paramInput) {
+    'Ping' {
+        Open-PingWindow
+    }
+    'Information' {
+        write-Output "Display User Information" | Out-Default
+    }
+
+}
 
 $main_form.ShowDialog()
 $main_form.Dispose()
